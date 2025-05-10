@@ -1,45 +1,45 @@
 .button {
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    border: none;
-    border-radius: 12px;
-    padding: 20px;
-    font-size: 1.5em;
-    cursor: pointer;
-    box-shadow: var(--shadow-outer-soft);
-    transition: all 0.1s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 12px;
+  padding: 20px;
+  font-size: 1.5em;
+  cursor: pointer;
+  box-shadow: var(--shadow-outer-soft);
+  transition: all 0.1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
 }
 
 .button:hover {
-    filter: brightness(0.95);
+  filter: brightness(0.95);
 }
 
 .button:active {
-    box-shadow: var(--shadow-inner-soft);
-    filter: brightness(0.9);
+  box-shadow: var(--shadow-inner-soft);
+  filter: brightness(0.9);
 }
 
 .button.operator {
-    color: var(--primary-color);
-    font-weight: bold;
+  color: var(--primary-color);
+  font-weight: bold;
 }
 
 .button.action {
-    color: var(--error-color);
+  color: var(--error-color);
 }
 
 .button.equals {
-    background-color: var(--primary-color);
-    color: var(--primary-text-color);
-    box-shadow: var(--shadow-outer-strong);
+  background-color: var(--primary-color);
+  color: var(--primary-text-color);
+  box-shadow: var(--shadow-outer-strong);
 }
 
 .button.equals:active {
-    background-color: var(--primary-color);
-    box-shadow: var(--shadow-inner-strong);
-    filter: brightness(0.9);
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-inner-strong);
+  filter: brightness(0.9);
 }
