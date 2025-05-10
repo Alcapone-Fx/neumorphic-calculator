@@ -1,0 +1,35 @@
+:root {
+    --font-family: 'Roboto', sans-serif;
+
+    /* Light theme is the default*/
+    --bg-color: #e0e0e0;
+    --text-color: #333;
+    --display-bg-color: #dde1e7;
+    --button-bg-color: #e0e0e0;
+    --button-text-color: #555;
+    --button-active-bg-color: #c8c8c8;
+
+    /* Neumorphic shadows */
+    --shadow-outer-strong: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
+    --shadow-outer-soft: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
+    --shadow-inner-strong: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
+    --shadow-inner-soft: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff;
+
+    --primary-color: #3498db;
+    --primary-text-color: #fff;
+    --error-color: #e74c3c;
+}
+
+[data-theme="dark"] {
+    --bg-color: #2c3e50;
+    --text-color: #ecf0f1;
+    --display-bg-color: #34495e;
+    --button-bg-color: #2c3e50;
+    --button-text-color: #ecf0f1;
+    --button-active-bg-color: #22303f;
+
+    --shadow-outer-strong: 6px 6px 12px #22303f, -6px -6px 12px #364c61;
+    --shadow-outer-soft: 3px 3px 6px #22303f, -3px -3px 6px #364c61;
+    --shadow-inner-strong: inset 6px 6px 12px #22303f, inset -6px -6px 12px #364c61;
+    --shadow-inner-soft: inset 3px 3px 6px #22303f, inset -3px -3px 6px #364c61;
+}
