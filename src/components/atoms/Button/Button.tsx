@@ -1,5 +1,7 @@
 import { FunctionalComponent } from 'preact';
 
+import styles from './Button.module.css';
+
 interface ButtonProps {
   label: string;
   onClick: (value: string) => void;
@@ -12,6 +14,7 @@ export const Button: FunctionalComponent<ButtonProps> = ({
   label,
   onClick,
   value,
+  type,
   className,
 }) => {
   const handleClick = () => {
@@ -20,8 +23,8 @@ export const Button: FunctionalComponent<ButtonProps> = ({
 
   return (
     <button
+      className={`${className} ${styles.button} ${styles[type]}`}
       onClick={handleClick}
-      className={className}
       aria-label={label === '*' ? 'multiply' : label === '/' ? 'divide' : label}
     >
       {label}
