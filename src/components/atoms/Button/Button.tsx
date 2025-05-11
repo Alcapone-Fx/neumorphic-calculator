@@ -1,4 +1,4 @@
-import { FunctionalComponent } from 'preact';
+import { FunctionalComponent, ComponentChildren } from 'preact';
 
 import styles from './Button.module.css';
 
@@ -8,6 +8,7 @@ interface ButtonProps {
   value?: string;
   type?: 'number' | 'operator' | 'action' | 'equals';
   className?: string;
+  children?: ComponentChildren;
 }
 
 export const Button: FunctionalComponent<ButtonProps> = ({
@@ -16,6 +17,7 @@ export const Button: FunctionalComponent<ButtonProps> = ({
   value,
   type,
   className,
+  children,
 }) => {
   const handleClick = () => {
     onClick(value !== undefined ? value : label);
@@ -27,7 +29,8 @@ export const Button: FunctionalComponent<ButtonProps> = ({
       onClick={handleClick}
       aria-label={label === '*' ? 'multiply' : label === '/' ? 'divide' : label}
     >
-      {label}
+      {label ?? label}
+      {children}
     </button>
   );
 };

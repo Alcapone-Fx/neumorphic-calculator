@@ -32,7 +32,7 @@
   --dark-shadow-outer-main: 5px 5px 10px #222528, -5px -5px 10px #363B40;
   --dark-shadow-outer-active: 2px 2px 4px #222528, -2px -2px 4px #363B40;
   --dark-shadow-inner-main: inset 4px 4px 8px #222528, inset -4px -4px 8px #363B40;
-  --dark-accent-shadow-outer-main: 5px 5px 10px #234999, -5px -5px 10px #57afff;
+  --dark-accent-shadow-outer-main: 2px 2px 6px #234999, -2px -2px 6px #57afff;
   --dark-accent-shadow-outer-active: 2px 2px 4px #234999, -2px -2px 4px #57afff;
 
 
