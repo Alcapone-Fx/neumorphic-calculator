@@ -1,0 +1,22 @@
+.calculator {
+  width: 100%;
+  max-width: 350px;
+  padding: 25px 20px;
+  border-radius: 35px;
+  background-color: var(--bg-color);
+  box-shadow: var(--current-shadow-outer-main);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topControls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.buttonsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}

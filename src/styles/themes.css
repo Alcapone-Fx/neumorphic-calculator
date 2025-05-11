@@ -1,35 +1,65 @@
 :root {
-    --font-family: 'Roboto', sans-serif;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
-    /* Light theme is the default*/
-    --bg-color: #e0e0e0;
-    --text-color: #333;
-    --display-bg-color: #dde1e7;
-    --button-bg-color: #e0e0e0;
-    --button-text-color: #555;
-    --button-active-bg-color: #c8c8c8;
+  /* Light Theme */
+  --light-bg-color: #E0E5EC;
+  --light-text-color: #5B627A;
+  --light-text-secondary-color: #8A93A8;
+  --light-display-bg-color: #E0E5EC;
+  --light-button-bg-color: #E0E5EC;
+  --light-button-text-color: #5B627A;
 
-    /* Neumorphic shadows */
-    --shadow-outer-strong: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
-    --shadow-outer-soft: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
-    --shadow-inner-strong: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
-    --shadow-inner-soft: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff;
+  --light-shadow-outer-main: 6px 6px 12px #A3B1C6, -6px -6px 12px #FFFFFF;
+  --light-shadow-outer-active: 2px 2px 4px #A3B1C6, -2px -2px 4px #FFFFFF;
+  --light-shadow-inner-main: inset 4px 4px 8px #A3B1C6, inset -4px -4px 8px #FFFFFF;
 
-    --primary-color: #3498db;
-    --primary-text-color: #fff;
-    --error-color: #e74c3c;
+  /* Accent color */
+  --accent-color: #3D7BFF;
+  --accent-text-color: #FFFFFF;
+  --accent-shadow-outer-main: 4px 4px 8px #2e60c7, -4px -4px 8px #4c96ff;
+  --accent-shadow-outer-active: 2px 2px 4px #2e60c7, -2px -2px 4px #4c96ff;
+
+  --error-color: #e74c3c;
+
+  /* Dark Theme */
+  --dark-bg-color: #2C3034;
+  --dark-text-color: #E0E5EC;
+  --dark-text-secondary-color: #8A91A0;
+  --dark-display-bg-color: #2C3034;
+  --dark-button-bg-color: #2C3034;
+  --dark-button-text-color: #E0E5EC;
+
+  --dark-shadow-outer-main: 5px 5px 10px #222528, -5px -5px 10px #363B40;
+  --dark-shadow-outer-active: 2px 2px 4px #222528, -2px -2px 4px #363B40;
+  --dark-shadow-inner-main: inset 4px 4px 8px #222528, inset -4px -4px 8px #363B40;
+  --dark-accent-shadow-outer-main: 5px 5px 10px #234999, -5px -5px 10px #57afff;
+  --dark-accent-shadow-outer-active: 2px 2px 4px #234999, -2px -2px 4px #57afff;
+
+
+  /* Default to light theme variables */
+  --bg-color: var(--light-bg-color);
+  --text-color: var(--light-text-color);
+  --text-secondary-color: var(--light-text-secondary-color);
+  --display-bg-color: var(--light-display-bg-color);
+  --button-bg-color: var(--light-button-bg-color);
+  --button-text-color: var(--light-button-text-color);
+  --current-shadow-outer-main: var(--light-shadow-outer-main);
+  --current-shadow-outer-active: var(--light-shadow-outer-active);
+  --current-shadow-inner-main: var(--light-shadow-inner-main);
+  --current-accent-shadow-outer-main: var(--accent-shadow-outer-main);
+  --current-accent-shadow-outer-active: var(--accent-shadow-outer-active);
 }
 
 [data-theme="dark"] {
-    --bg-color: #2c3e50;
-    --text-color: #ecf0f1;
-    --display-bg-color: #34495e;
-    --button-bg-color: #2c3e50;
-    --button-text-color: #ecf0f1;
-    --button-active-bg-color: #22303f;
-
-    --shadow-outer-strong: 6px 6px 12px #22303f, -6px -6px 12px #364c61;
-    --shadow-outer-soft: 3px 3px 6px #22303f, -3px -3px 6px #364c61;
-    --shadow-inner-strong: inset 6px 6px 12px #22303f, inset -6px -6px 12px #364c61;
-    --shadow-inner-soft: inset 3px 3px 6px #22303f, inset -3px -3px 6px #364c61;
+  --bg-color: var(--dark-bg-color);
+  --text-color: var(--dark-text-color);
+  --text-secondary-color: var(--dark-text-secondary-color);
+  --display-bg-color: var(--dark-display-bg-color);
+  --button-bg-color: var(--dark-button-bg-color);
+  --button-text-color: var(--dark-button-text-color);
+  --current-shadow-outer-main: var(--dark-shadow-outer-main);
+  --current-shadow-outer-active: var(--dark-shadow-outer-active);
+  --current-shadow-inner-main: var(--dark-shadow-inner-main);
+  --current-accent-shadow-outer-main: var(--dark-accent-shadow-outer-main);
+  --current-accent-shadow-outer-active: var(--dark-accent-shadow-outer-active);
 }

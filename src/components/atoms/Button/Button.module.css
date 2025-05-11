@@ -2,11 +2,13 @@
   background-color: var(--button-bg-color);
   color: var(--button-text-color);
   border: none;
-  border-radius: 12px;
-  padding: 20px;
-  font-size: 1.5em;
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  font-size: 1.6em;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: var(--shadow-outer-soft);
+  box-shadow: var(--current-shadow-outer-main);
   transition: all 0.1s ease-in-out;
   display: flex;
   justify-content: center;
@@ -14,32 +16,55 @@
   user-select: none;
 }
 
-.button:hover {
-  filter: brightness(0.95);
-}
-
 .button:active {
-  box-shadow: var(--shadow-inner-soft);
-  filter: brightness(0.9);
+  box-shadow: var(--current-shadow-outer-active);
+  transform: scale(0.97);
 }
 
-.button.operator {
-  color: var(--primary-color);
-  font-weight: bold;
+/* Buttons with accent color background (C, =) */
+.accent {
+  background-color: var(--accent-color);
+  color: var(--accent-text-color);
+  box-shadow: var(--current-accent-shadow-outer-main);
 }
 
-.button.action {
-  color: var(--error-color);
+.accent:active {
+  box-shadow: var(--current-accent-shadow-outer-active);
 }
 
-.button.equals {
-  background-color: var(--primary-color);
-  color: var(--primary-text-color);
-  box-shadow: var(--shadow-outer-strong);
+/* Operator buttons (+, -, *, /, % in main grid) */
+.operator {
+  color: var(--accent-color);
+  font-size: 1.8em;
 }
 
-.button.equals:active {
-  background-color: var(--primary-color);
-  box-shadow: var(--shadow-inner-strong);
-  filter: brightness(0.9);
+.parenthesis {
+  color: var(--accent-color);
+  font-size: 1.6em;
+}
+
+/* Special styling for the top row buttons (C, Theme, %, DEL) */
+.topRow {
+  width: 60px;
+  height: 60px;
+  font-size: 1.3em;
+}
+
+.topRow.operator {
+  color: var(--accent-color);
+  font-size: 1.5em;
+}
+
+.topRow.accent {
+  font-size: 1.5em;
+}
+
+.deleteIcon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--button-text-color);
+}
+
+[data-theme='dark'] .deleteIcon svg {
+  stroke: var(--dark-button-text-color);
 }
