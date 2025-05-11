@@ -2,6 +2,7 @@ import { FunctionalComponent } from 'preact';
 
 import { Button } from '../../atoms/Button/Button';
 import { Display } from '../../atoms/Display/Display';
+import { ThemeSwitcher } from '../../atoms/ThemeSwitcher/ThemeSwitcher';
 import generalButtonStyles from '../../atoms/Button/Button.module.css';
 import styles from './Calculator.module.css';
 
@@ -53,7 +54,7 @@ export const Calculator: FunctionalComponent = () => {
           onClick={() => onButtonClick('C')}
           className={`${generalButtonStyles.topRow} ${generalButtonStyles.accent}`}
         />
-        <Button label="TS" onClick={() => {}} />
+        <ThemeSwitcher className={generalButtonStyles.topRow} />
         <Button
           label=""
           onClick={() => onButtonClick('DEL')}

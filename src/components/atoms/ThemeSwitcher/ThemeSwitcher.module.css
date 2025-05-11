@@ -1,0 +1,16 @@
+.themeSwitcherButton {
+  padding: 0;
+}
+
+.icon {
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeSwitcherButton svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--button-text-color);
+}
