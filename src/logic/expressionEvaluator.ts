@@ -82,7 +82,7 @@ export function evaluateExpression(expression: string): number | string {
     return 'Error: Parentheses';
   }
 
-  // 4. Attempt to evaluate the expression.
+  // 4. Evaluate the expression.
   try {
     const result = new Function('return ' + trimmedExpression)();
 
