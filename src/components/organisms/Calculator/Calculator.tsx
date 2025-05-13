@@ -3,9 +3,12 @@ import { FunctionalComponent } from 'preact';
 import { Button } from '../../atoms/Button/Button';
 import { Display } from '../../atoms/Display/Display';
 import { ThemeSwitcher } from '../../atoms/ThemeSwitcher/ThemeSwitcher';
-import { useCalculatorState } from '../../../hooks/useCalculatorState';
 import generalButtonStyles from '../../atoms/Button/Button.module.css';
+import { GitHubLink } from '../../atoms/GitHubLink/GitHubLink';
+import { useCalculatorState } from '../../../hooks/useCalculatorState';
 import styles from './Calculator.module.css';
+
+const GITHUB_REPO_URL = 'https://github.com/Alcapone-Fx/neumorphic-calculator';
 
 const BackspaceIcon = () => (
   <svg
@@ -149,6 +152,9 @@ export const Calculator: FunctionalComponent = () => {
           onClick={() => onButtonClick('=')}
           className={generalButtonStyles.accent}
         />
+      </div>
+      <div className={styles.footerControls}>
+        <GitHubLink url={GITHUB_REPO_URL} tooltipText="View on GitHub" />
       </div>
     </div>
   );

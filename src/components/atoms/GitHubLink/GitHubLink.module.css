@@ -1,0 +1,49 @@
+.githubLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  color: var(--text-secondary-color);
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  text-decoration: none;
+}
+
+.githubLink svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.githubLink:hover {
+  color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.githubLink:active {
+  transform: scale(0.95);
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: var(--current-shadow-outer-active);
+  font-size: 0.8em;
+}
+
+.githubLink:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}

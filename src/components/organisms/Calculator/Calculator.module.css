@@ -5,7 +5,9 @@
   border-radius: 35px;
   background-color: var(--bg-color);
   box-shadow: var(--current-shadow-outer-main);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .topControls {
@@ -19,4 +21,12 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+}
+
+.footerControls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 15px;
+  padding-right: 5px;
 }
