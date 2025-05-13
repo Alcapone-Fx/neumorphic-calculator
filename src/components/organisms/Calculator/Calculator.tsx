@@ -3,6 +3,7 @@ import { FunctionalComponent } from 'preact';
 import { Button } from '../../atoms/Button/Button';
 import { Display } from '../../atoms/Display/Display';
 import { ThemeSwitcher } from '../../atoms/ThemeSwitcher/ThemeSwitcher';
+import { useCalculatorState } from '../../../hooks/useCalculatorState';
 import generalButtonStyles from '../../atoms/Button/Button.module.css';
 import styles from './Calculator.module.css';
 
@@ -25,22 +26,37 @@ const BackspaceIcon = () => (
 );
 
 export const Calculator: FunctionalComponent = () => {
-  const displayValue = '0';
-  const expression = '+';
-  const error = '';
+  const {
+    displayValue,
+    expression,
+    error,
+    handleInput,
+    calculate,
+    clearAll,
+    deleteLast,
+    toggleSign,
+    applyPercentage,
+  } = useCalculatorState();
+
   const onButtonClick = (value: string) => {
     switch (value) {
       case '=':
-        console.log('equal');
+        calculate();
         break;
       case 'C':
-        console.log('clear');
+        clearAll();
         break;
       case 'DEL':
-        console.log('delete');
+        deleteLast();
+        break;
+      case '+/-':
+        toggleSign();
+        break;
+      case '%':
+        applyPercentage();
         break;
       default:
-        console.log(value);
+        handleInput(value);
     }
   };
 
