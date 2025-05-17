@@ -99,36 +99,40 @@ export const processInput = (
   value: string
 ): ExpressionUpdate => {
   let newInternal = currentInternal;
-  let newDisplay = currentDisplay;
   let newIsResult = isResult;
 
-  // Input after a result is already displayed ---
   if (isResult) {
     const isNewInputOperator = OPERATORS.includes(value);
+
     if (isNewInputOperator) {
-      newInternal = currentDisplay + value; // The previous result is the start of a new expression
+      newInternal = currentDisplay + value;
     } else {
       newInternal = value === '.' ? '0.' : value;
     }
-    newDisplay = newInternal;
     newIsResult = false;
   } else {
     const isInputTooLong =
-      newInternal.length >= MAX_INPUT_LENGTH && !['(', ')'].includes(value); // Allow parentheses for closing complex expressions
+      newInternal.length >= MAX_INPUT_LENGTH && !['(', ')'].includes(value);
 
     if (isInputTooLong) {
       return {
         newInternalExpression: currentInternal,
         newDisplayValue: currentDisplay,
+        newIsResultDisplayed: isResult,
       };
+    }
+
+    if (newInternal.endsWith(')') && !OPERATORS.includes(value)) {
+      newInternal += '*';
     }
 
     if (value === '.') {
       const decimalResult = _handleDecimalInput(newInternal);
       if (!decimalResult.canAppend) {
         return {
-          newInternalExpression: currentInternal,
-          newDisplayValue: currentDisplay,
+          newInternalExpression: newInternal,
+          newDisplayValue: newInternal,
+          newIsResultDisplayed: false,
         };
       }
       newInternal = decimalResult.updatedExpression;
@@ -143,32 +147,27 @@ export const processInput = (
       !OPERATORS.includes(value) &&
       !['(', ')'].includes(value)
     ) {
-      newInternal = value; // Replacing the initial '0' with a new number
-    } else if (
-      newInternal.endsWith(')') &&
-      !OPERATORS.includes(value) &&
-      value !== '.'
-    ) {
-      newInternal += '*' + value; // Implicit multiplication after a closing parenthesis: (2+3)5 -> (2+3)*5
+      newInternal = value;
     } else if (
       newInternal.endsWith('(') &&
       OPERATORS.includes(value) &&
       value !== '-'
     ) {
-      // Prevent an invalid operator sequence after an opening parenthesis, e.g., (* or (/
       return {
         newInternalExpression: currentInternal,
         newDisplayValue: currentDisplay,
+        newIsResultDisplayed: isResult,
       };
     } else {
       newInternal += value;
     }
-    newDisplay = newInternal === '' ? '0' : newInternal;
   }
+
+  const newDisplayValue = newInternal === '' ? '0' : newInternal;
 
   return {
     newInternalExpression: newInternal,
-    newDisplayValue: newDisplay,
+    newDisplayValue: newDisplayValue,
     newIsResultDisplayed: newIsResult,
   };
 };
@@ -187,62 +186,101 @@ export const processToggleSign = (
   currentDisplay: string,
   isResult: boolean
 ): ExpressionUpdate => {
-  if (currentDisplay === 'Error' || currentDisplay === '0') {
-    return {
-      newInternalExpression: currentInternal,
-      newDisplayValue: currentDisplay,
-    };
+  if (
+    currentDisplay === 'Error' ||
+    (currentDisplay === '0' && !currentInternal.startsWith('(-'))
+  ) {
+    if (
+      currentDisplay === '0' &&
+      (currentInternal === '0' || currentInternal === '')
+    ) {
+      return {
+        newInternalExpression: currentInternal,
+        newDisplayValue: currentDisplay,
+      };
+    }
+    if (currentDisplay === 'Error') {
+      return {
+        newInternalExpression: currentInternal,
+        newDisplayValue: currentDisplay,
+      };
+    }
   }
 
   let newInternal = currentInternal;
   let newDisplay = currentDisplay;
 
-  if (isResult || !isNaN(parseFloat(currentInternal))) {
-    const num = parseFloat(currentDisplay);
-    if (!isNaN(num)) {
-      newDisplay = String(num * -1);
-      newInternal = newDisplay;
+  const isEntireExpressionANumber =
+    !isNaN(parseFloat(currentInternal)) && isFinite(Number(currentInternal));
+  let isSingleWrappedNumber = false;
+  if (currentInternal.startsWith('(-') && currentInternal.endsWith(')')) {
+    const inner = currentInternal.substring(2, currentInternal.length - 1);
+    if (!isNaN(parseFloat(inner)) && isFinite(Number(inner))) {
+      isSingleWrappedNumber = true;
+    }
+  }
+
+  if (isResult || isEntireExpressionANumber || isSingleWrappedNumber) {
+    let numToToggleStr = currentDisplay;
+    if (!isResult && isSingleWrappedNumber) {
+      numToToggleStr = currentInternal.substring(2, currentInternal.length - 1);
+      const num = parseFloat(numToToggleStr);
+      if (!isNaN(num)) {
+        newDisplay = numToToggleStr;
+        newInternal = numToToggleStr;
+      }
+    } else {
+      const num = parseFloat(numToToggleStr);
+      if (!isNaN(num)) {
+        const toggledNum = num * -1;
+        if (
+          !isResult &&
+          toggledNum < 0 &&
+          num >= 0 &&
+          !currentInternal.startsWith('(-')
+        ) {
+          newDisplay = `(${String(toggledNum)})`;
+          newInternal = newDisplay;
+        } else if (
+          !isResult &&
+          toggledNum >= 0 &&
+          num < 0 &&
+          currentInternal.startsWith('(-') &&
+          currentInternal.endsWith(')')
+        ) {
+          newDisplay = String(toggledNum);
+          newInternal = newDisplay;
+        } else {
+          newDisplay = String(toggledNum);
+          newInternal = newDisplay;
+        }
+      }
     }
   } else {
-    // Attempt to toggle the last number segment in the expression
-    const match = currentInternal.match(/([+\-*/(]|^)([\d.]+)$/);
+    const match = currentInternal.match(/([+\-*/(]|^)([\d.]+|\(-[\d.]+\))$/);
+
     if (match) {
-      const prefix = match[1];
-      const numberStr = match[2];
-      const baseExpr = currentInternal.substring(
-        0,
-        currentInternal.length - numberStr.length - prefix.length
+      const endsWithWrappedNegative = currentInternal.match(/\(-([\d.]+)\)$/);
+      const endsWithSimpleNumber = currentInternal.match(
+        /([+\-*/(]|^)([\d.]+)$/
       );
 
-      if (
-        prefix === '' &&
-        currentInternal.startsWith('(-') &&
-        currentInternal.endsWith(')')
-      ) {
-        newInternal = currentInternal.substring(2, currentInternal.length - 1);
-      } else if (
-        prefix === '(' &&
-        currentInternal.endsWith(')') &&
-        currentInternal.charAt(prefix.length) === '-'
-      ) {
-        newInternal = baseExpr + prefix + numberStr.substring(1);
-      } else if (prefix !== '' && prefix.endsWith('(-')) {
-        newInternal = baseExpr + prefix.slice(0, -2) + numberStr;
-      } else {
-        newInternal = baseExpr + prefix + `(-${numberStr})`;
+      if (endsWithWrappedNegative) {
+        const numberInside = endsWithWrappedNegative[1];
+        const prefixLength =
+          currentInternal.length - `(-${numberInside})`.length;
+        newInternal = currentInternal.substring(0, prefixLength) + numberInside;
+      } else if (endsWithSimpleNumber) {
+        const operatorOrStart = endsWithSimpleNumber[1];
+        const number = endsWithSimpleNumber[2];
+        const prefixLength =
+          currentInternal.length - (operatorOrStart + number).length;
+        newInternal =
+          currentInternal.substring(0, prefixLength) +
+          operatorOrStart +
+          `(-${number})`;
       }
-      newDisplay = newInternal;
-    } else if (
-      currentInternal.startsWith('(-') &&
-      currentInternal.endsWith(')')
-    ) {
-      newInternal = currentInternal.substring(2, currentInternal.length - 1);
-      newDisplay = newInternal;
-    } else if (currentInternal.startsWith('-')) {
-      newInternal = currentInternal.substring(1);
-      newDisplay = newInternal;
-    } else {
-      newInternal = `(-${currentInternal})`;
+
       newDisplay = newInternal;
     }
   }
