@@ -12,7 +12,7 @@ A modern neumorphic calculator built with Preact, TypeScript, and Vite. This pro
 *   **Error Handling:** Displays user-friendly messages for invalid operations or syntax errors.
 
 ## 🚀 Live Demo
-TBD.
+https://neumorphic-calculator-psi.vercel.app
 
 ## 🛠️ Tech Stack
 *   **Framework:** [Preact](https://preactjs.com/) (Fast 3kB alternative to React with the same modern API)
