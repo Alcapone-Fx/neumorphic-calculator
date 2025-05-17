@@ -17,7 +17,8 @@
       "react-dom": [
         "./node_modules/preact/compat/"
       ]
-    }
+    },
+    "types": ["vitest/globals", "@testing-library/jest-dom", "vite/client"]
   },
   "include": [
     "node_modules/vite/client.d.ts",
